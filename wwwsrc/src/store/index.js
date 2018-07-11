@@ -32,6 +32,7 @@ export default new vuex.Store({
     login({dispatch, commit}, loginCred) {
       auth.post('/login', loginCred)
         .then(res => {
+          console.log(res.data)
           commit('setUser', res.data)
         })
     },

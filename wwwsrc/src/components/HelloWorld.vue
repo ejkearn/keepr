@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    {{currentUser}}
    <form @submit.prevent="login">
      <input type="text" placeholder = "email" v-model ="logCreds.Email">
      <input type="password" v-model="logCreds.Password">
@@ -31,7 +32,10 @@ export default {
     }
   },
   computed: {
-
+    currentUser(){
+      return this.$store.state.currentUser
+    } 
+    
     },
     methods: {
       login(){

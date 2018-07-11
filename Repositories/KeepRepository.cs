@@ -14,9 +14,9 @@ namespace API_Users.Repositories
     // Create Post
     public Keep CreateKeep(Keep newKeep)
     {
-      string id = _db.ExecuteScalar<string>(@"
-                INSERT INTO keeps (title, body, authorId)
-                VALUES (@Title, @Body, @AuthorId);
+      int id = _db.ExecuteScalar<int>(@"
+                INSERT INTO keeps (username, userId, description, url)
+                VALUES (@Username, @UserId, @Description, @Url);
                 SELECT LAST_INSERT_ID();
             ", newKeep);
       newKeep.Id = id;
@@ -29,23 +29,22 @@ namespace API_Users.Repositories
       return _db.Query<Keep>("SELECT * FROM keeps;");
     }
     // GetbyAuthor
-    public IEnumerable<Keep> GetbyAuthorId(string id)
+    public IEnumerable<Keep> GetbyAuthorId(int id)
     {
-      return _db.Query<Keep>("SELECT * FROM keeps WHERE authorId = @id;", new { id });
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @id;", new { id });
     }
     // GetbyId
-    public Keep GetbyKeepId(string id)
+    public Keep GetbyKeepId(int id)
     {
       return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keepss WHERE id = @id;", new { id });
     }
     // Edit
-    public Keep EditKeep(string id, Keep keep)
+    public Keep EditKeep(int id, Keep keep)
     {
       keep.Id = id;
       var i = _db.Execute(@"
                 UPDATE keeps SET
-                    title = @Title,
-                    body = @Body
+                    description = @Description
                 WHERE id = @Id
             ", keep);
       if (i > 0)
@@ -55,7 +54,7 @@ namespace API_Users.Repositories
       return null;
     }
     // Delete
-    public bool DeleteKeep(string id)
+    public bool DeleteKeep(int id)
     {
       var i = _db.Execute(@"
       DELETE FROM keeps

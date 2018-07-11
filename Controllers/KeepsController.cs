@@ -9,19 +9,32 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Users.Controllers
 {
-  [Authorize]
+  // [Authorize]
   [Route("api/[controller]")]
   public class KeepsController : Controller
   {
-        private readonly KeepRepository _db;
+    private readonly KeepRepository _db;
     public KeepsController(KeepRepository repo)
     {
-      _db = repo;  
+      _db = repo;
     }
-            [HttpGet]
-        public IEnumerable<Keep> Get()
-        {
-            return new List<Keep>();
-        }
+    [HttpGet]
+    public IEnumerable<Keep> GetALL()
+    {
+      return _db.GetAll();
+    }
+
+    [HttpPost]
+    public Keep CreateKeep([FromBody]Keep newKeep)
+    {
+      if (ModelState.IsValid)
+      {
+        // var user = HttpContext.User;
+        // newKeep.UserId = user.Identity.Name;
+        return _db.CreateKeep(newKeep);
+      }
+      return null;
+    }
+
   }
 }

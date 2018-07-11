@@ -21,9 +21,10 @@
 
 -- CREATE TABLE keeps (
 --     id int NOT NULL AUTO_INCREMENT,
---     name VARCHAR(20) NOT NULL,
---     description VARCHAR(255) NOT NULL,
+--     username VARCHAR(20) NOT NULL,
 --     userId VARCHAR(255),
+--     description VARCHAR(255) NOT NULL,
+--      url VARCHAR(255),
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
