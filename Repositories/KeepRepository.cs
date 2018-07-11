@@ -29,14 +29,14 @@ namespace API_Users.Repositories
       return _db.Query<Keep>("SELECT * FROM keeps;");
     }
     // GetbyAuthor
-    public IEnumerable<Keep> GetbyAuthorId(int id)
+    public IEnumerable<Keep> GetbyAuthorId(string id)
     {
       return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @id;", new { id });
     }
     // GetbyId
     public Keep GetbyKeepId(int id)
     {
-      return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keepss WHERE id = @id;", new { id });
+      return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @id;", new { id });
     }
     // Edit
     public Keep EditKeep(int id, Keep keep)

@@ -18,12 +18,14 @@ namespace API_Users.Controllers
     {
       _db = repo;
     }
+    //GEt all Keeps
     [HttpGet]
     public IEnumerable<Keep> GetALL()
     {
       return _db.GetAll();
     }
 
+//create Keep
     [HttpPost]
     public Keep CreateKeep([FromBody]Keep newKeep)
     {
@@ -34,6 +36,25 @@ namespace API_Users.Controllers
         return _db.CreateKeep(newKeep);
       }
       return null;
+    }
+
+        //get keep by id
+    [HttpGet("{id}")]
+    public Keep GetById(int id)
+    {
+      return _db.GetbyKeepId(id);
+    }
+    //get keep by author
+    [HttpGet("author/{id}")]
+    public IEnumerable<Keep> GetByAuthorId(string id)
+    {
+      return _db.GetbyAuthorId(id);
+    }
+    //edit keep
+    [HttpPut("{id}")]
+    public Keep EditPost(int id, [FromBody]Keep newKeep)
+    {
+      return _db.EditKeep(id, newKeep);
     }
 
   }
