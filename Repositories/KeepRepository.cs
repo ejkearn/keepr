@@ -3,7 +3,6 @@ using System.Data;
 using API_Users.Models;
 using Dapper;
 
-
 namespace API_Users.Repositories
 {
   public class KeepRepository : DbContext
@@ -70,9 +69,6 @@ namespace API_Users.Repositories
 
     // Add get user favs to user
   }
-
-
-
 
 
 }

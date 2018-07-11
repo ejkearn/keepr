@@ -11,50 +11,50 @@ namespace API_Users.Controllers
 {
   // [Authorize]
   [Route("api/[controller]")]
-  public class KeepsController : Controller
+  public class VaultsController : Controller
   {
-    private readonly KeepRepository _db;
-    public KeepsController(KeepRepository repo)
+    private readonly VaultRepository _db;
+    public VaultsController(VaultRepository repo)
     {
       _db = repo;
     }
-    //GEt all Keeps
+    //GEt all Vaults
     [HttpGet]
-    public IEnumerable<Keep> GetALL()
+    public IEnumerable<Vault> GetALL()
     {
       return _db.GetAll();
     }
 
-//create Keep
+//create Vault
     [HttpPost]
-    public Keep CreateKeep([FromBody]Keep newKeep)
+    public Vault Createvault([FromBody]Vault newVault)
     {
       if (ModelState.IsValid)
       {
         // var user = HttpContext.User;
         // newKeep.UserId = user.Identity.Name;
-        return _db.CreateKeep(newKeep);
+        return _db.CreateVault(newVault);
       }
       return null;
     }
 
-        //get keep by id
+        //get Vault by id
     [HttpGet("{id}")]
-    public Keep GetById(int id)
+    public Vault GetById(int id)
     {
-      return _db.GetbyKeepId(id);
+      return _db.GetbyVaultId(id);
     }
-    //get keep by author
+    //get Vault by author
     [HttpGet("author/{id}")]
-    public IEnumerable<Keep> GetByAuthorId(string id)
+    public IEnumerable<Vault> GetByAuthorId(string id)
     {
       return _db.GetbyAuthorId(id);
     }
-    //edit keep
+    //edit Vault
     [HttpPut("{id}")]
-    public Keep EditKeep(int id, [FromBody]Keep newKeep)
+    public Vault EditVault(int id, [FromBody]Vault newVault)
     {
-      return _db.EditKeep(id, newKeep);
+      return _db.EditVault(id, newVault);
     }
 
   }
