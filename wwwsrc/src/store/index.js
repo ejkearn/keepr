@@ -41,7 +41,13 @@ export default new vuex.Store({
         .then(res =>{
           dispatch('login')
         })
-      }
+      },
+    authenticate({dispatch, commit}){
+      auth.get('/authenticate')
+      .then(res=>{
+        commit('setUser', res.data)
+      })
+    }
     
 
     

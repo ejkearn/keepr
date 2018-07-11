@@ -3,13 +3,14 @@
     {{currentUser}}
    <form @submit.prevent="login">
      <input type="text" placeholder = "email" v-model ="logCreds.Email">
-     <input type="password" v-model="logCreds.Password">
+     <input type="password" placeholder= "password" v-model="logCreds.Password">
+     
      <button>submit</button>
    </form>
    <form @submit.prevent="register">
     <input type="text" placeholder = "Email" v-model ="newUser.Email">
     <input type="text" placeholder = "Username" v-model ="newUser.Username">
-    <input type="password" v-model="newUser.Password">
+    <input type="password" placeholder= "password" v-model="newUser.Password">
     <button>submit</button>
   </form>
   </div>
@@ -18,6 +19,9 @@
 <script>
 export default {
   name: 'HelloWorld',
+  mounted(){
+    this.$store.dispatch('authenticate')
+  },
   data () {
     return {
       logCreds: {
