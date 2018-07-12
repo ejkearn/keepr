@@ -39,8 +39,7 @@ export default new vuex.Store({
   actions: {
 
       getVaults({dispatch, commit, state}){
-        console.log(state.currentUser.userId)
-        api.get('/vaults/author/'+ state.currentUser.userId)
+        api.get('/vaults/author/'+ state.currentUser.id)
         .then(res => {
           commit('setVaults', res.data)
         })
