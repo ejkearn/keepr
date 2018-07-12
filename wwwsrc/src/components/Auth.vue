@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="Auth">
     {{currentUser}}
    <form @submit.prevent="login">
      <input type="text" placeholder = "email" v-model ="logCreds.Email">
