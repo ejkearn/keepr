@@ -38,6 +38,7 @@ export default new vuex.Store({
 
   actions: {
 
+    // Vaults +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       getVaults({dispatch, commit, state}){
         api.get('/vaults/author/'+ state.currentUser.id)
         .then(res => {

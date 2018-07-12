@@ -5,7 +5,13 @@
       <input type="text" v-model="newKeep.Url" placeholder="Image URL">
       <button type="submit">submit</button>
     </form>
-{{Keeps}}
+    <div v-for="keep in Keeps">
+      {{keep}}
+      <router-link :to="{name: 'KeepDetail'}">
+        <button >Details</button>
+
+      </router-link>
+    </div>
   </div>
 </template>
 

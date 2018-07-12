@@ -4,6 +4,7 @@ import Auth from '@/components/auth'
 import Home from '@/components/home'
 import Keeps from '@/components/keeps'
 import Vaults from '@/components/vaults'
+import KeepDetail from '@/components/KeepDetail'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/Vaults',
       name: 'Vaults',
       component: Vaults,
+    },
+    {
+      path: '/KeepDetail',
+      name: 'KeepDetail',
+      component: KeepDetail
     },
   ]
 })
