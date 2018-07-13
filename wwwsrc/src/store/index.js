@@ -59,6 +59,14 @@ export default new vuex.Store({
       })
     },
 
+    getVaultKeeps({dispatch, commit, state}){
+      api.get('/vaultkeeps/vault/' + state.currentVault.id)
+      .then(res=>{
+        console.log(res)
+        dispatch('getKeepsFromVault', res.data)
+      })
+    },
+
     // Vaults +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     getVaults({ dispatch, commit, state }) {
       api.get('/vaults/author/' + state.currentUser.id)
@@ -109,6 +117,22 @@ export default new vuex.Store({
         .then(res => {
           commit("", res.data)
         })
+    },
+
+
+    getKeepsFromVault({dispatch, commit, state}, keeps){
+    
+      var newKeeps = []
+      for (let index = 0; index < keeps.length; index++) {
+        const currId = keeps[index].keepId;
+        api.get('/keeps/'+ currId)
+        .then(res =>{
+          newKeeps.push(res.data)
+        })
+
+        commit('setKeeps', newKeeps)
+        
+      }
     },
 
     addNewKeep({ dispatch, commit, state }, newKeep) {

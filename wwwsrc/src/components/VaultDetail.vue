@@ -1,6 +1,10 @@
 <template>
   <div class="">
     {{currentVault}}
+    <!-- {{keeps}} -->
+    <div v-for="item in keeps">
+      {{item}}
+    </div>
   </div>
 </template>
 
@@ -8,8 +12,7 @@
   export default {
     name: '',
     created(){
-      // this.addView()
-      // this.$store.dispatch("getVaultKeeps")
+      this.$store.dispatch("getVaultKeeps")
     },
     data() {
       return {
