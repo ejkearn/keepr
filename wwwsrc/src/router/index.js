@@ -6,6 +6,7 @@ import Keeps from '@/components/keeps'
 import Vaults from '@/components/vaults'
 import KeepDetail from '@/components/KeepDetail'
 import VaultDetail from '@/components/VaultDetail'
+import MyKeeps from '@/components/Mykeeps'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ export default new Router({
       name: 'Keeps',
       component: Keeps,
     },
+  {
+    path: '/MyKeeps',
+    name: 'MyKeeps',
+    component: MyKeeps,
+  },
     {
       path: '/Vaults',
       name: 'Vaults',

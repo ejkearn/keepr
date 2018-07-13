@@ -12,8 +12,8 @@
     </router-link>
   </div>
   <div class="col">
-      <router-link :to="{name:'Keeps'}">
-    keeps
+      <router-link :to="{name:'MyKeeps'}">
+    My keeps
     </router-link>
   </div>
   <div class="col">

@@ -1,14 +1,19 @@
 <template>
   <div class="">
     <NavBar></NavBar>
-{{currentKeep}}
+
+            <img class="card-img-top" :src="currentKeep.url">
+
+              <h5>{{currentKeep.description}}</h5>
+              <p>Views: {{currentKeep.views}} Saves: {{currentKeep.saves}}</p>
 <div v-for="vault in vaults">
 
   <button @click="addToVault(vault)">
     add to Vault:  {{vault.description}}
   </button>
 </div>
-<button @click="deleteKeep">delete</button>
+
+<button v-if="currentKeep.userId == currentUser.id" @click="deleteKeep">delete</button>
   </div>
 </template>
 
@@ -35,6 +40,9 @@
       },
       vaults(){
         return this.$store.state.vaults
+      },
+      currentUser(){
+        return this.$store.state.currentUser
       }
     },
     methods: {

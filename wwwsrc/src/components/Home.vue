@@ -1,14 +1,15 @@
 <template>
   <div class="Home">
     <NavBar></NavBar>
-    <h1>title</h1>
-    <h1>Keeps go here</h1>
+    <h1>Keepr</h1>
+    <keeps></keeps>
 
   </div>
 </template>
 
 <script>
   import NavBar from './NavBar'
+  import Keeps from './Keeps'
   export default {
     name: 'Home',
     data() {
@@ -18,6 +19,7 @@
     },
     components: {
       NavBar,
+      Keeps,
     },
     computed: {},
     methods: {}

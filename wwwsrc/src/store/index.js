@@ -114,6 +114,12 @@ export default new vuex.Store({
           commit('setKeeps', res.data)
         })
     },
+    getKeepsUserId({ dispatch, commit, state }) {
+      api.get('/keeps/author/' + state.currentUser.id)
+        .then(res => {
+          commit("setKeeps", res.data)
+        })
+    },
 
     getKeepId({ dispatch, commit, state }) {
       api.get('/keeps/' + state.currentKeep.Id)
