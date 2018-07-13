@@ -1,7 +1,7 @@
 <template>
   <div class="Auth">
     <NavBar></NavBar>
-    {{currentUser}}
+
    <form @submit.prevent="login">
      <input type="text" placeholder = "email" v-model ="logCreds.Email">
      <input type="password" placeholder= "password" v-model="logCreds.Password">

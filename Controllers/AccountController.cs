@@ -94,6 +94,13 @@ namespace API_Users.Controllers
             return "How did you even get here?";
         }
 
+            [HttpDelete("{id}")]
+    public async Task<string> Logout()
+    {
+      await HttpContext.SignOutAsync();
+      return "logged out";
+    }
+
 
 
     }

@@ -189,6 +189,12 @@ export default new vuex.Store({
         .then(res => {
           commit('setUser', res.data)
         })
+    },
+    logout({dispatch, commit,state}){
+      auth.delete('/'+state.currentUser.id)
+      .then(res =>{
+        console.log(res)
+      })
     }
 
 

@@ -2,6 +2,10 @@
     <div class="">
         <NavBar></NavBar>
         <h1>My Keeps</h1>
+        <div v-if="!currentUser.id">
+            <h2>Please Log in to continue</h2>
+          </div>
+        <div v-if="currentUser.id">
       <form @submit.prevent="addNewKeep">
         <input type="text" v-model="newKeep.Description" placeholder="description">
         <input type="url" v-model="newKeep.Url" placeholder="Image URL">
@@ -19,6 +23,7 @@
               </div>
             </div>
       </div>
+    </div>
     </div>
   </template>
   
@@ -43,6 +48,9 @@
       computed: {
         Keeps(){
         return this.$store.state.keeps
+      },
+      currentUser(){
+        return this.$store.state.currentUser
       }
       },
       methods: {

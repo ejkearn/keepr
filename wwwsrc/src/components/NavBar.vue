@@ -17,10 +17,16 @@
     </router-link>
   </div>
   <div class="col">
+    <div v-if="!User.id">
       <router-link :to="{name:'Auth'}">
     login
     </router-link>
-    {{User.username}}
+    </div>
+    <div v-if="User.id">
+
+      Welcome: {{User.username}}
+      <button @click="logout">Logout</button>
+    </div>
   </div>
 </div>
   </div>
@@ -46,7 +52,11 @@
         return this.$store.state.currentUser
       }
     },
-    methods: {}
+    methods: {
+      logout(){
+        this.$store.dispatch('logout')
+      }
+    }
   }
 
 </script>
