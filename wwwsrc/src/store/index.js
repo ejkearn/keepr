@@ -56,6 +56,9 @@ export default new vuex.Store({
       api.post('/vaultkeeps', newvk)
       .then(res=>{
         console.log(res)
+        var newKeep = state.currentKeep
+        newKeep.saves = state.currentKeep.saves+1
+        dispatch('editKeep', newKeep)
       })
     },
 
@@ -148,7 +151,7 @@ export default new vuex.Store({
 
     editKeep({ dispatch, commit }, keep) {
       console.log(keep)
-      api.put('/keeps/' + keep.id)
+      api.put('/keeps/' + keep.id, keep)
       .then(res=>{
         console.log(res)
       })

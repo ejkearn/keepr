@@ -15,7 +15,7 @@
   export default {
     name: '',
     created(){
-      // this.addView()
+      this.addView()
       this.$store.dispatch("getVaults")
     },
     data() {
