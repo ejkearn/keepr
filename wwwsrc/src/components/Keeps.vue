@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <navBar></navBar>
     <form @submit.prevent="addNewKeep">
       <input type="text" v-model="newKeep.Description" placeholder="description">
       <input type="text" v-model="newKeep.Url" placeholder="Image URL">
@@ -16,8 +17,12 @@
 </template>
 
 <script>
+  import NavBar from './NavBar'
   export default {
     name: 'Keeps',
+    components: {
+      NavBar,
+    },
     created(){
       this.$store.dispatch('getAllKeeps')
     },

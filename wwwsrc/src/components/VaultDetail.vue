@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <NavBar></NavBar>
     {{currentVault}}
     <!-- {{keeps}} -->
     <div v-for="item in keeps">
@@ -9,8 +10,12 @@
 </template>
 
 <script>
+  import NavBar from './NavBar'
   export default {
     name: '',
+    components: {
+      NavBar,
+    },
     created(){
       this.$store.dispatch("getVaultKeeps")
     },

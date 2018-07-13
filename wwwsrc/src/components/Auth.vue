@@ -1,5 +1,6 @@
 <template>
   <div class="Auth">
+    <NavBar></NavBar>
     {{currentUser}}
    <form @submit.prevent="login">
      <input type="text" placeholder = "email" v-model ="logCreds.Email">
@@ -17,8 +18,12 @@
 </template>
 
 <script>
+  import NavBar from './NavBar'
 export default {
   name: 'HelloWorld',
+  components: {
+      NavBar,
+    },
   mounted(){
     this.$store.dispatch('authenticate')
   },

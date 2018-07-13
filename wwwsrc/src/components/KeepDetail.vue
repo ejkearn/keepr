@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <NavBar></NavBar>
 {{currentKeep}}
 <div v-for="vault in vaults">
 
@@ -12,8 +13,12 @@
 </template>
 
 <script>
+  import NavBar from './NavBar'
   export default {
     name: '',
+    components: {
+      NavBar,
+    },
     created(){
       this.addView()
       this.$store.dispatch("getVaults")

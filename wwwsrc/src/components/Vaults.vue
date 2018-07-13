@@ -1,5 +1,6 @@
 <template>
   <div class="Vaults">
+    <navBar></navBar>
       <form @submit.prevent="addNewVault">
           <input type="text" v-model="newVault.Description" placeholder="description">
           <button type="submit">submit</button>
@@ -16,8 +17,12 @@
 </template>
 
 <script>
+  import NavBar from './NavBar'
   export default {
     name: 'Vaults',
+    components: {
+      NavBar,
+    },
     created(){
       this.$store.dispatch('getVaults')
     },
