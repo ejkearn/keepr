@@ -57,5 +57,11 @@ namespace API_Users.Controllers
       return _db.EditKeep(id, newKeep);
     }
 
+        [HttpDelete("{id}")]
+    public bool DeleteKeep(int id)
+    {
+      return _db.DeleteKeep(id);
+    }
+
   }
 }

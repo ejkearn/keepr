@@ -8,7 +8,7 @@
     <div v-for="keep in Keeps">
       {{keep}}
       <router-link :to="{name: 'KeepDetail'}">
-        <button >Details</button>
+        <button @click="setKeep(keep)">Details</button>
 
       </router-link>
     </div>
@@ -37,6 +37,9 @@
     methods: {
       addNewKeep(){
         this.$store.dispatch('addNewKeep', this.newKeep)
+      },
+      setKeep(keep){
+        this.$store.dispatch('setKeep', keep)
       }
     }
   }

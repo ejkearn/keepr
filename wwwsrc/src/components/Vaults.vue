@@ -4,7 +4,14 @@
           <input type="text" v-model="newVault.Description" placeholder="description">
           <button type="submit">submit</button>
         </form>
-{{vaults}}
+        <div v-for="vault in vaults">
+          
+          <router-link :to="{name: 'VaultDetail'}">
+              <button @click="setVault(vault)">{{vault.description}}</button>
+      
+            </router-link>
+        </div>
+
   </div>
 </template>
 
@@ -32,6 +39,9 @@
     methods: {
       addNewVault(){
         this.$store.dispatch('addNewVault', this.newVault)
+      },
+      setVault(vault){
+        this.$store.dispatch('setVault', vault)
       }
     }
   }

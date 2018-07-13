@@ -14,14 +14,14 @@ namespace API_Users.Repositories
     public Keep CreateKeep(Keep newKeep)
     {
       int id = _db.ExecuteScalar<int>(@"
-                INSERT INTO keeps (username, userId, description, url)
-                VALUES (@Username, @UserId, @Description, @Url);
+                INSERT INTO keeps (username, userId, description, url,views, saves)
+                VALUES (@Username, @UserId, @Description, @Url,@Views, @Saves);
                 SELECT LAST_INSERT_ID();
             ", newKeep);
       newKeep.Id = id;
       return newKeep;
     }
-    
+
     // GetAll Post
     public IEnumerable<Keep> GetAll()
     {
@@ -43,7 +43,9 @@ namespace API_Users.Repositories
       keep.Id = id;
       var i = _db.Execute(@"
                 UPDATE keeps SET
-                    description = @Description
+
+                    views = @Views,
+                    saves = @Saves
                 WHERE id = @Id
             ", keep);
       if (i > 0)
@@ -67,7 +69,7 @@ namespace API_Users.Repositories
       return false;
     }
 
-    // Add get user favs to user
+
   }
 
 

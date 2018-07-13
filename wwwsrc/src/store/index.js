@@ -22,81 +22,143 @@ export default new vuex.Store({
   state: {
     currentUser: {},
     keeps: {},
-    vaults:{}
+    currentKeep: {},
+    vaults: {},
+    currentVault: {}
   },
   mutations: {
-    setUser(state, user){
+    setUser(state, user) {
       state.currentUser = user
     },
-    setKeeps(state, keeps){
+    setKeeps(state, keeps) {
       state.keeps = keeps
     },
-    setVaults(state, vaults){
+    setKeep(state, keep) {
+      state.currentKeep = keep
+    },
+    setVaults(state, vaults) {
       state.vaults = vaults
-    }
+    },
+    setVault(state, vault) {
+      state.currentVault = vault
+    },
+
   },
 
   actions: {
-
-    // Vaults +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      getVaults({dispatch, commit, state}){
-        api.get('/vaults/author/'+ state.currentUser.id)
-        .then(res => {
-          commit('setVaults', res.data)
-        })
-      },
-
-      addNewVault({dispatch, commit, state}, newVault){
-        newVault.UserId = state.currentUser.id
-        newVault.Username = state.currentUser.username
-        // console.log(state.currentUser)
-        console.log(newVault)
-        api.post('/vaults', newVault)
-        .then(res => {
-          dispatch('getAllVaults')
-        })
-      },
-
-      // Keeps +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      getAllKeeps({dispatch, commit}){
-      api.get('/keeps')
-      .then(res => {
-        commit('setKeeps', res.data)
+    // Vault Keep Reverence+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    addToVault({dispatch, commit, state}, vault){
+      var newvk = {}
+      newvk.userId = state.currentUser.id
+      newvk.keepId = state.currentKeep.id
+      newvk.vaultId = vault.id
+      console.log(newvk)
+      api.post('/vaultkeeps', newvk)
+      .then(res=>{
+        console.log(res)
       })
     },
 
-    addNewKeep({dispatch, commit, state}, newKeep){
+    // Vaults +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    getVaults({ dispatch, commit, state }) {
+      api.get('/vaults/author/' + state.currentUser.id)
+        .then(res => {
+          commit('setVaults', res.data)
+        })
+    },
+
+    setVault({commit}, vault){
+      commit("setVault", vault)
+    },
+
+    addNewVault({ dispatch, commit, state }, newVault) {
+      newVault.UserId = state.currentUser.id
+      newVault.Username = state.currentUser.username
+      // console.log(state.currentUser)
+      console.log(newVault)
+      api.post('/vaults', newVault)
+        .then(res => {
+          dispatch('getVaults')
+        })
+    },
+
+    // Keeps +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    setKeep({commit}, keep){
+      commit("setKeep", keep)
+    },
+
+    addKeepView({dispatch, state}, keep){
+      
+      // var keepAdd = {}
+      // keepAdd.id =state.currentKeep.id 
+      // keepAdd.views = state.currentKeep.views +1
+    keep.views ++
+    keep.Views = keep.views
+      dispatch('editKeep', keep)
+    },
+
+    getAllKeeps({ dispatch, commit }) {
+      api.get('/keeps')
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
+    },
+
+    getKeepId({ dispatch, commit, state }) {
+      api.get('/keeps/' + state.currentKeep.Id)
+        .then(res => {
+          commit("", res.data)
+        })
+    },
+
+    addNewKeep({ dispatch, commit, state }, newKeep) {
       newKeep.UserId = state.currentUser.id
       newKeep.Username = state.currentUser.username
       // console.log(state.currentUser)
       // console.log(newKeep)
       api.post('/keeps', newKeep)
-      .then(res => {
-        dispatch('getAllKeeps')
+        .then(res => {
+          dispatch('getAllKeeps')
+        })
+    },
+
+    editKeep({ dispatch, commit }, keep) {
+      console.log(keep)
+      api.put('/keeps/' + keep.id)
+      .then(res=>{
+        console.log(res)
+      })
+    },
+
+    deleteKeep({dispatch, commit}, keep){
+      api.delete('/keeps/' + keep.id)
+      .then(res=>{
+        commit('setKeep', {})
+        dispatch("getAllKeeps")
       })
     },
     //auth stuff ============================================================================
-    login({dispatch, commit}, loginCred) {
+    login({ dispatch, commit }, loginCred) {
       auth.post('/login', loginCred)
         .then(res => {
           console.log(res.data)
           commit('setUser', res.data)
         })
     },
-    register({dispatch, commit}, newUser){
+    register({ dispatch, commit }, newUser) {
       auth.post('/register', newUser)
-        .then(res =>{
+        .then(res => {
           dispatch('login')
         })
-      },
-    authenticate({dispatch, commit}){
+    },
+    authenticate({ dispatch, commit }) {
       auth.get('/authenticate')
-      .then(res=>{
-        commit('setUser', res.data)
-      })
+        .then(res => {
+          commit('setUser', res.data)
+        })
     }
-    
 
-    
+
+
   }
-  })
+})
