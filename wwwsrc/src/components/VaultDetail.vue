@@ -4,6 +4,9 @@
     <h1>
       {{currentVault.description}}
     </h1>
+    <button class="btn-danger" @click="deleteVault">
+      Delete
+    </button>
     <!-- {{keeps}} -->
     <div v-for="keep in keeps">
         <div class="card" style="width: 18rem;">
@@ -43,7 +46,11 @@
         return this.$store.state.keeps
       }
     },
-    methods: {}
+    methods: {
+      deleteVault(){
+        this.$store.dispatch('deleteVault', this.currentVault)
+      },
+    }
   }
 
 </script>

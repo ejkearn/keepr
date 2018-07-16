@@ -25,7 +25,7 @@ namespace API_Users.Controllers
       return _db.GetAll();
     }
 
-//create Vault
+    //create Vault
     [HttpPost]
     public Vault Createvault([FromBody]Vault newVault)
     {
@@ -38,7 +38,7 @@ namespace API_Users.Controllers
       return null;
     }
 
-        //get Vault by id
+    //get Vault by id
     [HttpGet("{id}")]
     public Vault GetById(int id)
     {
@@ -55,6 +55,11 @@ namespace API_Users.Controllers
     public Vault EditVault(int id, [FromBody]Vault newVault)
     {
       return _db.EditVault(id, newVault);
+    }
+    [HttpDelete("{id}")]
+    public bool DeleteVault(int id)
+    {
+      return _db.DeleteVault(id);
     }
 
   }

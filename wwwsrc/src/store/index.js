@@ -89,8 +89,18 @@ export default new vuex.Store({
       console.log(newVault)
       api.post('/vaults', newVault)
         .then(res => {
-          dispatch('getVaults')
+          
+          state.currentVault = res.data
+          router.push({name: "VaultDetail"})
         })
+    },
+    deleteVault({dispatch, commit}, vault){
+      api.delete('/vaults/' + vault.id)
+      .then(res=>{
+        commit('setVault', {})
+        dispatch("getVaults")
+        router.push({name: 'Vaults'})
+      })
     },
 
     // Keeps +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -130,7 +140,7 @@ export default new vuex.Store({
 
 
     getKeepsFromVault({dispatch, commit, state}, keeps){
-    
+      state.keeps = []
       var newKeeps = []
       for (let index = 0; index < keeps.length; index++) {
         const currId = keeps[index].keepId;
