@@ -161,7 +161,9 @@ export default new vuex.Store({
       // console.log(newKeep)
       api.post('/keeps', newKeep)
         .then(res => {
-          dispatch('getAllKeeps')
+          state.currentKeep = res.data
+          router.push({name: "KeepDetail"})
+          
         })
     },
 
@@ -176,8 +178,7 @@ export default new vuex.Store({
     deleteKeep({dispatch, commit}, keep){
       api.delete('/keeps/' + keep.id)
       .then(res=>{
-        commit('setKeep', {})
-        dispatch("getAllKeeps")
+router.push({name: 'Keeps'})
       })
     },
     //auth stuff ============================================================================

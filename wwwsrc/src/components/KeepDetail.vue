@@ -13,7 +13,7 @@
   </button>
 </div>
 
-<button v-if="currentKeep.userId == currentUser.id" @click="deleteKeep">delete</button>
+<button v-if="currentKeep.userId == currentUser.id" @click="deleteKeep" class="btn-danger">delete</button>
   </div>
 </template>
 
