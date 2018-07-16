@@ -1,18 +1,19 @@
 <template>
   <div class="">
-
-    <div v-for="keep in Keeps">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" :src="keep.url">
-            <div class="card-body">
-              <h5 class="card-title">{{keep.description}}</h5>
-              <p class="card-text">Views: {{keep.views}} Saves: {{keep.saves}}</p>
-              <router-link :to="{name: 'KeepDetail'}">
-              <a href="#" class="btn btn-primary"@click="setKeep(keep)">Details</a>
-            </router-link>
-            </div>
+<div class="row">
+  <div v-for="keep in Keeps" class="col-4">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top" :src="keep.url">
+          <div class="card-body">
+            <h5 class="card-title">{{keep.description}}</h5>
+            <p class="card-text">Views: {{keep.views}} Saves: {{keep.saves}}</p>
+            <router-link :to="{name: 'KeepDetail'}">
+            <a href="#" class="btn btn-primary"@click="setKeep(keep)">Details</a>
+          </router-link>
           </div>
-    </div>
+        </div>
+  </div>
+</div>
   </div>
 </template>
 
