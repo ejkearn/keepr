@@ -185,7 +185,6 @@ router.push({name: 'Keeps'})
     login({ dispatch, commit }, loginCred) {
       auth.post('/login', loginCred)
         .then(res => {
-          console.log(res.data)
           commit('setUser', res.data)
         })
     },
@@ -204,7 +203,7 @@ router.push({name: 'Keeps'})
     logout({dispatch, commit,state}){
       auth.delete('/'+state.currentUser.id)
       .then(res =>{
-        console.log(res)
+        router.push({name: 'Auth'})
       })
     }
 
